@@ -54,13 +54,29 @@ pub struct Person {
 }
 
 pub fn organize(input: &str) -> Vec<Person> {
-    todo!()
+    let split_str: Vec<&str> = input.split(",").collect();
+    let mut organize_persons: Vec<Person> = vec![];
+    for chunk in split_str.chunks(3) {
+        let name = chunk[0].to_string();
+        let age = chunk[1].parse().unwrap();
+        let occupation = chunk[2].to_string();
+        organize_persons.push(Person {
+            name,
+            age,
+            occupation,
+        });
+    }
+    organize_persons
 }
 
 // ---------------------------------------- 4 ----------------------------------------
 /// Return a map of each letter to the list of its indices in `word`.
 pub fn letter_indices(word: &str) -> HashMap<char, Vec<usize>> {
-    todo!()
+    let mut indicies_hash: HashMap<char, Vec<usize>> = HashMap::new();
+    for (idx, ch) in word.chars().enumerate() {
+        indicies_hash.entry(ch).or_default().push(idx);
+    }
+    indicies_hash
 }
 
 // ---------------------------------------- 5 ----------------------------------------

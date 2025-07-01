@@ -82,8 +82,34 @@ pub fn letter_indices(word: &str) -> HashMap<char, Vec<usize>> {
 // ---------------------------------------- 5 ----------------------------------------
 /// Caesar‑shift every alphabetic character +3 positions, preserving case.
 pub fn letter_changes(s: &str) -> String {
-    todo!()
+    s.chars()
+        .map(|ch| match ch {
+            'a'..='z' => ((ch as u8 - b'a' + 3) % 26 + b'a') as char,
+            'A'..='Z' => ((ch as u8 - b'A' + 3) % 26 + b'A') as char,
+            _ => ch,
+        })
+        .collect()
 }
+
+// pub fn letter_changes(s: &str) -> String {
+//     s.chars()
+//         .map(|ch| {
+//             if ch.is_alphabetic() {
+//                 if ch.is_ascii_lowercase() {
+//                     let wrapped_ch = ((ch as u8 - b'a') + 3) % 26 + b'a';
+//                     wrapped_ch as char
+//                 } else if ch.is_ascii_uppercase() {
+//                     let wrapped_ch = ((ch as u8 - b'A') + 3) % 26 + b'A';
+//                     wrapped_ch as char
+//                 } else {
+//                     ch
+//                 }
+//             } else {
+//                 ch
+//             }
+//         })
+//         .collect()
+// }
 
 // ---------------------------------------- 6 ----------------------------------------
 /// Minimal length of a contiguous subarray whose sum ≥ `target` (0 if none).

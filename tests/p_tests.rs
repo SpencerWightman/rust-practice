@@ -65,10 +65,10 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn test_min_subarray_len() {
         assert_eq!(min_subarray_len(&[2, 3, 1, 2, 4, 3], 7), 2);
         assert_eq!(min_subarray_len(&[1, 4, 4], 4), 1);
+        assert_eq!(min_subarray_len(&[2, 3, 5, 4, 2], 7), 2);
         assert_eq!(min_subarray_len(&[1, 1, 1, 1, 1, 1, 1, 1], 11), 0);
     }
 }

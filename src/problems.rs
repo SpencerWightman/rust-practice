@@ -13,7 +13,6 @@ pub fn find_missing_letter(letters: &[char]) -> Option<char> {
     for (idx, l) in letters[..letters.len() - 1].iter().enumerate() {
         let next = letters[idx + 1].to_ascii_lowercase() as u8;
         let expected_next = (l.to_ascii_lowercase() as u8) + 1;
-        dbg!(next, expected_next);
         if next != expected_next {
             return Some(expected_next as char);
         }
@@ -40,7 +39,6 @@ pub fn generate_prime_array(start: u32, end: u32) -> Vec<u32> {
         }
         outer += 1;
     }
-    dbg!(&primes);
     primes
 }
 
@@ -114,8 +112,52 @@ pub fn letter_changes(s: &str) -> String {
 // ---------------------------------------- 6 ----------------------------------------
 /// Minimal length of a contiguous subarray whose sum ≥ `target` (0 if none).
 pub fn min_subarray_len(arr: &[u32], target: u32) -> usize {
-    todo!()
+    let mut min_valid_len = usize::MAX;
+    let mut l_ptr = 0;
+    let mut sum = 0;
+
+    for r_ptr in 0..arr.len() {
+        sum += arr[r_ptr];
+        while sum >= target {
+            let curr_len = r_ptr - l_ptr + 1;
+            if curr_len < min_valid_len {
+                min_valid_len = curr_len
+            };
+            sum -= arr[l_ptr];
+            l_ptr += 1;
+        }
+    }
+
+    if min_valid_len == usize::MAX {
+        0
+    } else {
+        min_valid_len
+    }
 }
+
+// pub fn min_subarray_len(arr: &[u32], target: u32) -> usize {
+//     let mut min_valid_len = usize::MAX;
+
+//     for anchor in 0..arr.len() {
+//         let mut runner = anchor;
+//         let mut temp_total: u32 = 0;
+//         while runner < arr.len() {
+//             temp_total += arr[runner];
+//             if temp_total >= target && (runner - anchor + 1) < min_valid_len {
+//                 if runner - anchor + 1 == 1 { return 1 };
+//                 min_valid_len = runner - anchor + 1;
+//                 break;
+//             }
+//             runner += 1;
+//         }
+//     }
+
+//     if min_valid_len == usize::MAX {
+//         0
+//     } else {
+//         min_valid_len
+//     }
+// }
 
 // ---------------------------------------- 7 ----------------------------------------
 /// Return the indices of the unique pair summing to `target`.

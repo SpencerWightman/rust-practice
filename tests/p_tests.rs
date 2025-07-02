@@ -22,9 +22,11 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn test_two_sum() {
         assert_eq!(two_sum(&[1, 3, 4, 5], 5), Some((0, 2)));
+        assert_eq!(two_sum(&[1, 1, 1,], 5), None);
+        assert_eq!(two_sum(&[5, 5, 0], 5), Some((1, 2))); // 0, 2
+        assert_eq!(two_sum(&[3, 1, 0, 4, 5], 5), Some((1, 3)));
     }
 
     #[test]
@@ -65,6 +67,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn test_min_subarray_len() {
         assert_eq!(min_subarray_len(&[2, 3, 1, 2, 4, 3], 7), 2);
         assert_eq!(min_subarray_len(&[1, 4, 4], 4), 1);

@@ -162,21 +162,33 @@ pub fn min_subarray_len(arr: &[u32], target: u32) -> usize {
 // ---------------------------------------- 7 ----------------------------------------
 /// Return the indices of the unique pair summing to `target`.
 pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
-    for (idx, num) in nums.iter().enumerate() {
-        let missing = target - num;
-        if let Some((missing_idx, _)) = nums[idx + 1..]
-            .iter()
-            .enumerate()
-            .find(|&(_, &n)| n == missing)
-        {
-            return Some((idx, idx + 1 + missing_idx));
+    let mut mem: HashMap<i32, usize> = HashMap::new();
+    for (i, &n) in nums.iter().enumerate() {
+        let link = target - n;
+        if let Some(&l) = mem.get(&link) {
+            return Some((l, i));
         }
+        mem.insert(n, i);
     }
     None
 }
 
+// pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
+//     for (idx, num) in nums.iter().enumerate() {
+//         let missing = target - num;
+//         if let Some((missing_idx, _)) = nums[idx + 1..]
+//             .iter()
+//             .enumerate()
+//             .find(|&(_, &n)| n == missing)
+//         {
+//             return Some((idx, idx + 1 + missing_idx));
+//         }
+//     }
+//     None
+// }
+
 // ---------------------------------------- 8 ----------------------------------------
-/// Sort odd numbers ascending while leaving even numbers in place (in‑place).
+/// Sort odd numbers ascending while leaving even numbers in‑place.
 pub fn sort_odd(nums: &mut [i32]) {
     todo!()
 }

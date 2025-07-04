@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 #![allow(unused_mut)]
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 
 // ---------------------------------------- 1 ----------------------------------------
 /// Return the single missing character in a consecutive slice of letters.
@@ -190,8 +190,35 @@ pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
 // ---------------------------------------- 8 ----------------------------------------
 /// Sort odd numbers ascending while leaving even numbers in‑place.
 pub fn sort_odd(nums: &mut [i32]) {
-    todo!()
+    let mut odd_sets: Vec<i32> = nums.iter().filter(|&&n| n % 2 != 0).copied().collect();
+    odd_sets.sort_unstable();
+
+    let mut odd_iter = odd_sets.into_iter();
+
+    for num in nums.iter_mut() {
+        if *num % 2 != 0 {
+            *num = odd_iter.next().unwrap();
+        }
+    }
 }
+
+// pub fn sort_odd(nums: &mut [i32]) {
+//     let mut odd_sets: VecDeque<i32> = VecDeque::new();
+//     for &num in nums.iter() {
+//         if num % 2 != 0 {
+//             let insert_idx = odd_sets.binary_search(&num);
+//             match insert_idx {
+//                 Ok(val1) => odd_sets.insert(val1, num),
+//                 Err(val2) => odd_sets.insert(val2, num),
+//             }
+//         }
+//     }
+//     for num in nums.iter_mut() {
+//         if *num % 2 != 0 {
+//             *num = odd_sets.pop_front().unwrap();
+//         }
+//     }
+// }
 
 // ---------------------------------------- 9 ----------------------------------------
 /// True if `s` can be formed by repeating one of its substrings.

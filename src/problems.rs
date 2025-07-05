@@ -223,8 +223,42 @@ pub fn sort_odd(nums: &mut [i32]) {
 // ---------------------------------------- 9 ----------------------------------------
 /// True if `s` can be formed by repeating one of its substrings.
 pub fn check_repeated_substring(s: &str) -> bool {
-    todo!()
+    // Explicit
+    if s.len() < 2 {
+        return false;
+    };
+
+    for i in 1..=s.len() / 2 {
+        if s.len() % i == 0 {
+            let sub = &s[..i];
+            let repeated_sub = sub.repeat(s.len() / i);
+            if repeated_sub == s {
+                return true;
+            }
+        }
+    }
+    false
 }
+
+// pub fn check_repeated_substring(s: &str) -> bool {
+//     let s_len = s.len();
+//     for start in 0..s_len {
+//         for end in start + 1..=s_len {
+//             let mut sub = &s[start..end];
+//             if sub == s {
+//                 return false;
+//             }
+//             let mut repeated_sub = String::new();
+//             while repeated_sub.len() < s_len {
+//                 repeated_sub.push_str(sub);
+//             }
+//             if repeated_sub == s {
+//                 return true;
+//             }
+//         }
+//     }
+//     false
+// }
 
 // ---------------------------------------- 10 ----------------------------------------
 /// Characters that appear in *every* string of `arr`, including duplicates.
